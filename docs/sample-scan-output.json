@@ -1,0 +1,110 @@
+{
+    "score": 0.0,
+    "total_checks": 6,
+    "findings": [
+        {
+            "check": "public_s3",
+            "resource_id": "app-payments-prod-example.co",
+            "severity": "CRITICAL",
+            "raw_finding": "Public Access Block is not fully enabled; Bucket policy allows Principal: *",
+            "explanation": "The S3 bucket policy allows public access, which is a critical security risk as it exposes sensitive data to unauthorized users. This can lead to data breaches and other security incidents. It's essential to restrict access to authorized users only.",
+            "fix_command": "aws s3api put-public-access-block --bucket app-payments-prod-example.co --public-access-block-configuration 'BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true'"
+        },
+        {
+            "check": "public_s3",
+            "resource_id": "codepipeline-ap-southeast-2-cb5cfc5d135d-47ed-8388-eabfb9cc7086",
+            "severity": "CRITICAL",
+            "raw_finding": "Bucket policy allows Principal: *; Bucket policy allows Principal: *",
+            "explanation": "The S3 bucket policy allows public access, which is a critical security risk as it exposes sensitive data to unauthorized users. This can lead to data breaches and other security incidents. It's essential to restrict access to authorized users only.",
+            "fix_command": "aws s3api put-public-access-block --bucket codepipeline-ap-southeast-2-cb5cfc5d135d-47ed-8388-eabfb9cc7086 --public-access-block-configuration 'BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true'"
+        },
+        {
+            "check": "public_s3",
+            "resource_id": "do-not-delete-ssm-diagnosis-996561439186-ap-southeast-2-emrz9",
+            "severity": "CRITICAL",
+            "raw_finding": "Bucket policy allows Principal: *; Bucket policy allows Principal: *",
+            "explanation": "The S3 bucket policy allows public access, which is a critical security risk as it exposes sensitive data to unauthorized users. This can lead to data breaches and other security incidents. It's essential to restrict access to authorized users only.",
+            "fix_command": "aws s3api put-public-access-block --bucket do-not-delete-ssm-diagnosis-996561439186-ap-southeast-2-emrz9 --public-access-block-configuration 'BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true'"
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-06df436c8db1dfdb1 (cspm-test-open-ssh)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-05d5564253a7eaa62 (launch-wizard-4)",
+            "severity": "CRITICAL",
+            "raw_finding": "Allows ALL traffic from 0.0.0.0/0 (no port restriction)",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-05d5564253a7eaa62 (launch-wizard-4)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-0c0d41e08c89639c4 (launch-wizard-1)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-0aee4c01cdb63a605 (launch-wizard-2)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-04ff49d6327f4087e (launch-wizard-5)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "open_security_groups",
+            "resource_id": "sg-0a04764d8281af507 (launch-wizard-3)",
+            "severity": "CRITICAL",
+            "raw_finding": "Port 22 (SSH) open to 0.0.0.0/0",
+            "explanation": "AI explanation unavailable for this finding.",
+            "fix_command": "See AWS documentation for remediation."
+        },
+        {
+            "check": "unencrypted_ebs",
+            "resource_id": "vol-05397debada70fb5b",
+            "severity": "MEDIUM",
+            "raw_finding": "Volume vol-05397debada70fb5b (30GB) is not encrypted",
+            "explanation": "The EBS volume is not encrypted, which is a medium security risk as it exposes sensitive data to unauthorized access in case the volume is compromised. It's essential to enable encryption to protect the data.",
+            "fix_command": "aws ec2 copy-volume --source-volume-id vol-05397debada70fb5b --encrypted --volume-type gp2 --availability-zone <availability-zone>"
+        },
+        {
+            "check": "unencrypted_ebs",
+            "resource_id": "vol-0acb78b5199a4a9ff",
+            "severity": "MEDIUM",
+            "raw_finding": "Volume vol-0acb78b5199a4a9ff (8GB) is not encrypted",
+            "explanation": "The EBS volume is not encrypted, which is a medium security risk as it exposes sensitive data to unauthorized access in case the volume is compromised. It's essential to enable encryption to protect the data.",
+            "fix_command": "aws ec2 copy-volume --source-volume-id vol-0acb78b5199a4a9ff --encrypted --volume-type gp2 --availability-zone <availability-zone>"
+        },
+        {
+            "check": "cloudtrail_status",
+            "resource_id": "N/A",
+            "severity": "CRITICAL",
+            "raw_finding": "No CloudTrail trails configured in this account/region.",
+            "explanation": "There are no CloudTrail trails configured in this account/region, which is a critical security risk as it makes it difficult to detect and respond to security incidents. It's essential to configure CloudTrail to monitor and log API calls.",
+            "fix_command": "aws cloudtrail create-trail --name my-trail --s3-bucket my-bucket --is-multi-region-trail --is-organization-trail"
+        }
+    ]
+}
