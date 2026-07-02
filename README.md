@@ -65,3 +65,31 @@ weighted compliance score.
 
 Frontend reuses the dashboard pattern from [AI Cloud Cost Detective], with
 columns swapped from cost data to severity/resource/explanation/fix.
+
+---------------------------------------------------------------
+
+## Before / After: Real Remediation Example
+
+To validate this tool against a live (not simulated) environment, I ran it
+against a sandbox AWS account with intentional misconfigurations, then used
+the AI-generated fix commands to remediate one finding and re-scanned.
+
+**Before fix** — see [`docs/sample-scan-output.json`](docs/sample-scan-output.json)
+
+The scan flagged a public S3 bucket (`cspm-test-public-...`) with the
+following AI-generated explanation:
+"The S3 bucket policy allows public access, which is a critical security risk as it exposes sensitive data to unauthorized users. This can lead to data breaches and other security incidents. It's essential to restrict access to authorized users only."
+
+Fix applied (from the tool's own `fix_command` output):
+```bash
+aws s3api delete-bucket-policy --bucket cspm-test-public-...
+aws s3api put-public-access-block --bucket cspm-test-public-... \
+  --public-access-block-configuration \
+  "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+```
+
+**After fix** — see [`docs/sample-scan-output-after-fix.json`](docs/sample-scan-output-after-fix.json)
+
+Compliance score improved from 0 to 10 after
+remediating the public bucket finding, confirming the scanner correctly
+detects and validates the fix.
